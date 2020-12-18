@@ -1,17 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+class App extends Component
+{
+    constructor(props)
+    {
+        super(props);
+        this.state={
+            count:0,
+        }
+    }
+    increment=()=>{
+     this.setState({count:this.state.count+1})
+    }
+    iswin=(counter)=>{
+        if(counter>10)
+        {
+            alert("player won");
+        }
+    }
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    render(){
+    return(
+        <div>
+        <button className="btn btn-warning" onClick={this.increment}>increment</button>
+        <p>{this.state.count}</p>
+        {this.iswin(this.state.count)}
+        </div>
+        
+    )
+    }
+}
+ReactDOM.render(<App/>,document.getElementById('root'));
