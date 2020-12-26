@@ -1,36 +1,18 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.css';
-import './index.css';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Calbutton from './Calbutton'
+import Callbutton from './Calbutton'
 
-class App extends Component
-{
-    constructor(props)
+function index() {
+    const handleclick=(value)=>
     {
-        super(props);
-        this.state={
-            count:0,
-        }
+        console.log(value)
     }
-    increment=()=>{
-     this.setState({count:this.state.count+1})
-    }
-    iswin=(counter)=>{
-        if(counter>10)
-        {
-            alert("player won");
-        }
-    }
-
-    render(){
-    return(
+    return (
         <div>
-        <button className="btn btn-warning" onClick={this.increment}>increment</button>
-        <p>{this.state.count}</p>
-        {this.iswin(this.state.count)}
+        <Callbutton value={10} parentcallback={handleclick}/>    
         </div>
-        
     )
-    }
 }
-ReactDOM.render(<App/>,document.getElementById('root'));
+
+ReactDOM.render(<index/>,document.getElementById('root'));
