@@ -1,18 +1,18 @@
 import React,{useState} from 'react'
 import ReactDOM from 'react-dom'
+import {Button} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Callbutton from './Calbutton'
 
 function Index() {
-    
-    const[value,setvalue]=useState([1,2,3,4,5,7,8,9,0])
-    const[operator,setoperator]=useState(["*","+","-","/"])
+  
     const [equation,setequation]=useState("")
     const [answer,setanswer]=useState(0);
     //input from the user
     const handleclick=(data)=>
     {
-        var lastcharachter=equation.charAt(equation.length);
+        var lastcharachter=equation.charAt(equation.length-1)
         console.log("lastcharachter is"+lastcharachter)
         if(equation===""||lastcharachter==="*"||lastcharachter==="+"||lastcharachter==="-"||lastcharachter==="/")
         {
@@ -34,25 +34,40 @@ function Index() {
         }
        
     }
+    //clear screen function
+    const clearEquation=()=>
+    {
+        setequation("");
+    }
     //calculating the output from the equation
     const answerfunc=()=>
     {
         try{
-            setanswer(eval(equation));
+            setequation(eval(equation));
         }
         catch(e)
         {
-            setanswer("math error")
+            setequation("math error")
         }
     }
     return (
         <div>
-        <input type="text" value={equation}></input>
-        <label>Answer</label>
-        <input type="text" value={answer}></input>
-        {value.map(value=>(<Callbutton key={value} value={value} parentcallback={handleclick}/>  ))}
-        {operator.map(operator=>(<Callbutton key={operator} value={operator} parentcallback={handleclick}/>))}
-        <button onClick={answerfunc}>=</button>
+            <div className="container">
+                <div className="row">
+                    <input className="input-group-text" type="text" value={equation}></input>
+                </div>
+                
+               
+                <div className="row">
+                         <Callbutton value="1" classname="btn btn-primary" parentcallback={handleclick}/>
+                        <Callbutton value="2" classname="btn btn-primary" parentcallback={handleclick}/>
+                        <Callbutton value="3" classname="btn btn-primary" parentcallback={handleclick}/>  
+                </div>
+                
+                <button onClick={answerfunc}>=</button>
+                <button className="btn btn-warning" onClick={clearEquation}>C</button>
+            </div>
+       
         </div>
     )
 }
