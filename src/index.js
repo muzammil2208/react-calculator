@@ -1,37 +1,20 @@
 import React,{useState} from 'react'
 import ReactDOM from 'react-dom'
-import {Button} from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css'
+
 
 import Callbutton from './Calbutton'
 
 function Index() {
   
     const [equation,setequation]=useState("")
-    const [answer,setanswer]=useState(0);
+    
     //input from the user
     const handleclick=(data)=>
     {
-        var lastcharachter=equation.charAt(equation.length-1)
-        console.log("lastcharachter is"+lastcharachter)
-        if(equation===""||lastcharachter==="*"||lastcharachter==="+"||lastcharachter==="-"||lastcharachter==="/")
-        {
-            if(data==="*"||data==="-"||data==="+"||data==="/")
-            console.log("cannot add operator after a operator")
-            else
-            {
-                var result=equation+data;
-                setequation(result);
-            }
-
-        }
-        else
-        {
-
-             var result=equation+data;
-                setequation(result);
-        
-        }
+       var result=equation+data;
+       setequation(result)
+       
        
     }
     //clear screen function
@@ -43,29 +26,60 @@ function Index() {
     const answerfunc=()=>
     {
         try{
+            
             setequation(eval(equation));
         }
         catch(e)
-        {
+        { 
             setequation("math error")
+           alert("you have entered wrong equation")
+           setequation("")
+            
         }
     }
     return (
         <div>
-            <div className="container">
+            
+            <div className="container"><h1>React Calculator app</h1>
                 <div className="row">
-                    <input className="input-group-text" type="text" value={equation}></input>
+                    <div className="input-group col">
+                    <input className="form-control input-text" type="text" value={equation}></input>
+                    </div>
+                    
                 </div>
-                
+
                
                 <div className="row">
-                         <Callbutton value="1" classname="btn btn-primary" parentcallback={handleclick}/>
-                        <Callbutton value="2" classname="btn btn-primary" parentcallback={handleclick}/>
-                        <Callbutton value="3" classname="btn btn-primary" parentcallback={handleclick}/>  
+                         <Callbutton value="1" classname="btn btn-outline-primary col" parentcallback={handleclick}/>
+                        <Callbutton value="2" classname="btn btn-outline-primary col" parentcallback={handleclick}/>
+                        <Callbutton value="3" classname="btn btn-outline-primary col" parentcallback={handleclick}/> 
+                        <button className="btn btn-outline-warning col" onClick={clearEquation}>C</button>
+
+                </div>
+                <div className="row">
+                         <Callbutton value="4" classname="btn btn-outline-primary col" parentcallback={handleclick}/>
+                        <Callbutton value="5" classname="btn btn-outline-primary col" parentcallback={handleclick}/>
+                        <Callbutton value="6" classname="btn btn-outline-primary col" parentcallback={handleclick}/> 
+                        <Callbutton value="+" classname="btn btn-outline-success col" parentcallback={handleclick}/> 
+
+
+                </div>
+                <div className="row">
+                         <Callbutton value="7" classname="btn btn-outline-primary col" parentcallback={handleclick}/>
+                        <Callbutton value="8" classname="btn btn-outline-primary col" parentcallback={handleclick}/>
+                        <Callbutton value="9" classname="btn btn-outline-primary col" parentcallback={handleclick}/> 
+                        <Callbutton value="-" classname="btn btn-outline-success col" parentcallback={handleclick}/> 
+
+                </div>
+                <div className="row">
+                    <Callbutton value="0" classname="btn btn-outline-primary col-6" parentcallback={handleclick}/>
+                    <Callbutton value="/"  classname="btn btn-outline-success col-3" parentcallback={handleclick}/>
+                    <Callbutton value="*" classname=" btn btn-outline-success col-3" parentcallback={handleclick}/>
                 </div>
                 
-                <button onClick={answerfunc}>=</button>
-                <button className="btn btn-warning" onClick={clearEquation}>C</button>
+                <div className="row">
+                <button  className="btn btn-danger col"onClick={answerfunc}>=</button>
+                </div>
             </div>
        
         </div>

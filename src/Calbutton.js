@@ -5,7 +5,8 @@ function Calbutton(props) {
         props.parentcallback(props.value)
     }
     return (
-        <div className="col btn btn-primary" onClick={onclicking}>
+        
+        <div className={props.classname} onClick={onclicking}>
           
             {props.value}
         </div>
