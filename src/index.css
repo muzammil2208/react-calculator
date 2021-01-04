@@ -1,4 +1,16 @@
+*
+{
+    box-sizing: border-box;
+}
 .form-text
 {
  font-size: larger;
+}
+.container{
+    padding:10% 30%;
+}
+.input-text
+{
+    
+    margin:10px;
 }
